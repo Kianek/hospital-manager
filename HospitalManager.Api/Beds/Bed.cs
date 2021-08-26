@@ -38,7 +38,7 @@ namespace HospitalManager.Api.Beds
             PatientId = patient.Id;
             Patient = patient;
             patient.Bed = this;
-            IsOccupied = true;
+            IsOccupied = !IsOccupied;
 
             return true;
         }
