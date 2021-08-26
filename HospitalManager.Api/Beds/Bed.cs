@@ -45,7 +45,13 @@ namespace HospitalManager.Api.Beds
 
         public bool RemovePatient()
         {
-            throw new NotImplementedException();
+            if (Patient is null) return false;
+            
+            PatientId = null;
+            Patient = null;
+            IsOccupied = !IsOccupied;
+            
+            return true;
         }
 
         public BedDto AsDto() => new(this);
