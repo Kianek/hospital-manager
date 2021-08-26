@@ -7,7 +7,6 @@ namespace HospitalManager.Api.Beds
 {
     public class Bed : Entity
     {
-
         public Guid RoomId { get; set; }
         public Room Room { get; set; }
         public Guid? PatientId { get; set; }
@@ -26,7 +25,22 @@ namespace HospitalManager.Api.Beds
 
         public bool AssignPatient(Patient patient)
         {
-            throw new NotImplementedException();
+            if (patient == null)
+            {
+                throw new ArgumentNullException(nameof(patient));
+            }
+
+            if (IsOccupied)
+            {
+                return false;
+            }
+
+            PatientId = patient.Id;
+            Patient = patient;
+            patient.Bed = this;
+            IsOccupied = true;
+
+            return true;
         }
 
         public bool RemovePatient()
