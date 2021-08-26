@@ -59,13 +59,13 @@ namespace HospitalManager.UnitTests.Beds
         {
             _bed.AssignPatient(_patient);
             
-            Assert.True(_bed.IsOccupied());
+            Assert.True(_bed.IsOccupied);
         }
 
         [Fact]
         public void IsOccupied_PatientNull_ReturnsFalse()
         {
-            Assert.False(_bed.IsOccupied());
+            Assert.False(_bed.IsOccupied);
         }
     }
 }
