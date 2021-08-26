@@ -25,15 +25,10 @@ namespace HospitalManager.Api.Beds
 
         public bool AssignPatient(Patient patient)
         {
-            if (patient == null)
-            {
+            if (patient is null)
                 throw new ArgumentNullException(nameof(patient));
-            }
 
-            if (IsOccupied)
-            {
-                return false;
-            }
+            if (IsOccupied) return false;
 
             PatientId = patient.Id;
             Patient = patient;
