@@ -15,7 +15,7 @@ namespace HospitalManager.UnitTests.Hospitals
         public HospitalServiceTest(DbFixture fixture)
         {
             _context = fixture.Context;
-            _context.Database.EnsureCreated();
+            ResetDatabase().GetAwaiter().GetResult();
             _service = new HospitalService(_context);
         }
 
@@ -26,17 +26,19 @@ namespace HospitalManager.UnitTests.Hospitals
             await PrepDbWithHospitals(numberOfHospitals);
 
             var hospitals = await _service.GetAllHospitals();
-            
+
             Assert.True(hospitals.Count == numberOfHospitals);
         }
 
         [Fact]
         public async Task GetAllHospitals_NoHospitals_ReturnsEmptySequence()
         {
+            await PrepDbWithHospitals(0);
             var hospitals = await _service.GetAllHospitals();
-            
+
             Assert.True(hospitals.Count == 0);
         }
+
 
         [Fact]
         public async Task GetHospitalById_HospitalFound_ReturnsHospital()
@@ -45,7 +47,7 @@ namespace HospitalManager.UnitTests.Hospitals
             var hospitalId = savedHospitals[0].Id;
 
             var result = await _service.GetHospitalById(hospitalId);
-            
+
             Assert.NotNull(result);
         }
 
@@ -53,7 +55,7 @@ namespace HospitalManager.UnitTests.Hospitals
         public async Task GetHospitalById_NotFound_ReturnsNull()
         {
             var result = await _service.GetHospitalById(Guid.NewGuid());
-            
+
             Assert.Null(result);
         }
 
@@ -64,7 +66,7 @@ namespace HospitalManager.UnitTests.Hospitals
             var hospital = hospitals[0];
 
             var result = await _service.GetHospitalByName(hospital.Name);
-            
+
             Assert.NotNull(result);
             Assert.True(hospital.Name == result.Name);
         }
@@ -73,7 +75,7 @@ namespace HospitalManager.UnitTests.Hospitals
         public async Task GetHospitalByName_HospitalNotFound_ReturnsNull()
         {
             var result = await _service.GetHospitalByName("Nonexistent Hospital");
-            
+
             Assert.Null(result);
         }
 
@@ -81,9 +83,9 @@ namespace HospitalManager.UnitTests.Hospitals
         public async Task CreateHospital_HospitalCreated_ReturnsHospital()
         {
             var info = Helpers.GetHospitalInfo();
-            
+
             var result = await _service.CreateHospital(info);
-            
+
             Assert.NotNull(result);
             Assert.Equal(info.Name, result.Name);
         }
@@ -92,10 +94,10 @@ namespace HospitalManager.UnitTests.Hospitals
         public async Task CreateHospital_InvalidArgs_ThrowsException()
         {
             var info = Helpers.GetHospitalInfo(numberOfRooms: -4);
-            
+
             await Assert.ThrowsAnyAsync<Exception>(() => _service.CreateHospital(info));
         }
-        
+
         private async Task<List<Hospital>> PrepDbWithHospitals(int numberOfHospitals = 3)
         {
             var hospitals = new List<Hospital>();
@@ -104,10 +106,18 @@ namespace HospitalManager.UnitTests.Hospitals
                 hospitals.Add(Helpers.GetHospital($"Hospital {i}", 10));
             }
 
+            await ResetDatabase();
+
             _context.Hospitals.AddRange(hospitals);
             await _context.SaveChangesAsync();
 
             return hospitals;
+        }
+
+        private async Task ResetDatabase()
+        {
+            await _context.Database.EnsureDeletedAsync();
+            await _context.Database.EnsureCreatedAsync();
         }
     }
 }
