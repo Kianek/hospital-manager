@@ -33,5 +33,8 @@ namespace HospitalManager.UnitTests
 
             return new(_room.RoomNumber, patient, bed);
         }
+
+        public static HospitalInfo GetHospitalInfo(string name = "Sickhouse General", int numberOfRooms = 10)
+            => new(name, numberOfRooms);
     }
 }
