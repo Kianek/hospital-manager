@@ -49,7 +49,7 @@ namespace HospitalManager.Api.Rooms
             throw new NotImplementedException();
         }
 
-        public bool RemovePatientFromBed(Guid bedId)
+        public bool RemovePatientFromBed(Bed bed)
         {
             throw new NotImplementedException();
         }
