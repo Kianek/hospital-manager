@@ -12,8 +12,8 @@ namespace HospitalManager.Api.Patients
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public Guid RoomId { get; set; }
-        public Room Room { get; set; }
+        public Guid? RoomId { get; set; }
+        public Room? Room { get; set; }
         public Guid? BedId { get; set; }
 
         public Bed? Bed
