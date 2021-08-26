@@ -70,6 +70,18 @@ namespace HospitalManager.UnitTests.Rooms
             Assert.True(_room.OccupiedBeds == 1);
         }
 
+
+        [Fact]
+        public void AssignBedToPatient_BedNotFound_ReturnsFalse()
+        {
+            var bedAssignment = new PatientBedAssignment(_room.RoomNumber, _patient, Helpers.GetBed());
+
+            _room.AssignPatientToBed(bedAssignment);
+            var result = _room.AssignPatientToBed(bedAssignment);
+            
+            Assert.False(result);
+        }
+
         [Fact]
         public void AssignBedToPatient_BedOccupied_ReturnsFalse()
         {
