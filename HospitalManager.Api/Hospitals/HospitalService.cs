@@ -25,9 +25,9 @@ namespace HospitalManager.Api.Hospitals
                 .ToListAsync();
         }
 
-        public Task<Hospital> GetHospitalById(Guid hospitalId)
+        public async Task<Hospital> GetHospitalById(Guid hospitalId)
         {
-            throw new NotImplementedException();
+            return await _context.Hospitals.FindAsync(hospitalId);
         }
 
         public Task<Hospital> GetHospitalByName(string name)
