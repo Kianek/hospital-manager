@@ -27,13 +27,11 @@ namespace HospitalManager.UnitTests
 
         public static Patient GetPatient() => new ("American", "McGee");
 
-        public static PatientBedAssignment GetBedAssignment(Room room = null, Bed bed = null, Patient patient = null)
+        public static PatientBedAssignment GetBedAssignment(Room room, Bed bed = null, Patient patient = null)
         {
             var _room = room ?? GetRoom();
-            var _bed = bed ?? GetBed();
-            var _patient = patient ?? GetPatient();
 
-            return new(_room.RoomNumber, _patient, _bed);
+            return new(_room.RoomNumber, patient, bed);
         }
     }
 }
