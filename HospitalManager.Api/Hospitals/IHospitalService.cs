@@ -6,7 +6,7 @@ namespace HospitalManager.Api.Hospitals
 {
     public interface IHospitalService
     {
-        Task<IEnumerable<Hospital>> GetAllHospitals();
+        Task<List<Hospital>> GetAllHospitals();
         Task<Hospital> GetHospitalById(Guid hospitalId);
         Task<Hospital> GetHospitalByName(string name);
         Task<int> CreateHospital(string name, int numberOfRooms);
