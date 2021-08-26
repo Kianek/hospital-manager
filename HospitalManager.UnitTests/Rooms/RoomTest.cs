@@ -111,7 +111,7 @@ namespace HospitalManager.UnitTests.Rooms
         public void RemovePatientFromBed_BedOccupied_PatientRemoved_ReturnsTrue()
         {
             _room.AddBed(_bed);
-            _bed.AssignPatient(_patient);
+            _room.AssignPatientToBed(Helpers.GetBedAssignment(_room, _bed, _patient));
 
             Assert.True(_room.RemovePatientFromBed(_bed));
             Assert.True(_room.OccupiedBeds == 0);
