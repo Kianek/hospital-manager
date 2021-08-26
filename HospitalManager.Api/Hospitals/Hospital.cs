@@ -15,6 +15,9 @@ namespace HospitalManager.Api.Hospitals
         
         public Hospital(string name, int numberOfRooms)
         {
+            if (String.IsNullOrEmpty(name)) throw new ArgumentException(nameof(name));
+            if (numberOfRooms <= 0) throw new ArgumentOutOfRangeException(nameof(numberOfRooms));
+            
             Name = name;
             Rooms = GenerateRooms(numberOfRooms);
         }
@@ -23,7 +26,13 @@ namespace HospitalManager.Api.Hospitals
 
         private List<Room> GenerateRooms(int numberOfRooms)
         {
-            throw new NotImplementedException();
+            var rooms = new List<Room>(numberOfRooms);
+            for (var i = 0; i < rooms.Capacity; i++)
+            {
+                rooms.Add(new Room(roomNumber: i + 1, this));
+            }
+
+            return rooms;
         }
 
         public HospitalDto AsDto() => new(this);
