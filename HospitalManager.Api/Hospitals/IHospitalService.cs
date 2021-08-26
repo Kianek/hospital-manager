@@ -9,8 +9,6 @@ namespace HospitalManager.Api.Hospitals
         Task<IEnumerable<Hospital>> GetAllHospitals();
         Task<Hospital> GetHospitalById(Guid hospitalId);
         Task<Hospital> GetHospitalByName(string name);
-        Task CreateHospital(string name, int numberOfRooms);
-        Task RenameHospital(string oldName, HospitalInfo updatedInfo);
-        Task DeleteHospital(string name);
+        Task<int> CreateHospital(string name, int numberOfRooms);
     }
 }

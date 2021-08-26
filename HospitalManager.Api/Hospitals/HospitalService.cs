@@ -29,17 +29,7 @@ namespace HospitalManager.Api.Hospitals
             throw new NotImplementedException();
         }
 
-        public Task CreateHospital(string name, int numberOfRooms)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task RenameHospital(string oldName, HospitalInfo updatedInfo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteHospital(string name)
+        public Task<int> CreateHospital(string name, int numberOfRooms)
         {
             throw new NotImplementedException();
         }
