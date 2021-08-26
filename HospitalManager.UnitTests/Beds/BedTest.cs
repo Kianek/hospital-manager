@@ -53,19 +53,5 @@ namespace HospitalManager.UnitTests.Beds
         {
             Assert.False(_bed.RemovePatient());
         }
-
-        [Fact]
-        public void IsOccupied_PatientNotNull_ReturnsTrue()
-        {
-            _bed.AssignPatient(_patient);
-            
-            Assert.True(_bed.IsOccupied);
-        }
-
-        [Fact]
-        public void IsOccupied_PatientNull_ReturnsFalse()
-        {
-            Assert.False(_bed.IsOccupied);
-        }
     }
 }
