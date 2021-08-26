@@ -17,7 +17,7 @@ namespace HospitalManager.Api.Rooms
         public Guid HospitalId { get; set; }
         public Hospital Hospital { get; set; }
         public List<Bed> Beds { get; set; }
-        
+
         public Room(int roomNumber, Hospital hospital)
         {
             RoomNumber = roomNumber;
@@ -27,13 +27,15 @@ namespace HospitalManager.Api.Rooms
             HospitalId = hospital.Id;
             Hospital = hospital;
         }
-        
-        public Room() {}
+
+        public Room()
+        {
+        }
 
         public void AddBed(Bed bed)
         {
             if (bed is null) throw new ArgumentNullException(nameof(bed));
-            
+
             bed.Room = this;
             Beds.Add(bed);
             NumberOfBeds++;
@@ -41,7 +43,16 @@ namespace HospitalManager.Api.Rooms
 
         public bool RemoveBed(Bed bed)
         {
-            throw new NotImplementedException();
+            if (bed is null) throw new ArgumentNullException(nameof(bed));
+            
+            var bedRemoved = Beds.Remove(bed);
+
+            if (bedRemoved)
+            {
+                NumberOfBeds--;
+            }
+
+            return bedRemoved;
         }
 
         public bool AssignPatientToBed(PatientBedAssignment assignment)
