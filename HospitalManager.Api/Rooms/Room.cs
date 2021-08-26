@@ -10,8 +10,9 @@ namespace HospitalManager.Api.Rooms
     public class Room : Entity
     {
         public int RoomNumber { get; }
-        public int AvailableBeds { get; private set; }
-        public bool HasVacancy => AvailableBeds > 0;
+        public int NumberOfBeds { get; private set; }
+        public int OccupiedBeds { get; private set; }
+        public bool HasVacancy => NumberOfBeds > OccupiedBeds;
 
         public Guid HospitalId { get; set; }
         public Hospital Hospital { get; set; }
@@ -21,7 +22,8 @@ namespace HospitalManager.Api.Rooms
         {
             RoomNumber = roomNumber;
             Beds = new List<Bed>();
-            AvailableBeds = 0;
+            NumberOfBeds = 0;
+            OccupiedBeds = 0;
             HospitalId = hospital.Id;
             Hospital = hospital;
         }
