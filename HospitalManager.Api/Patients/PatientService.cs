@@ -13,7 +13,7 @@ namespace HospitalManager.Api.Patients
             _context = context;
         }
 
-        public Task<bool> RegisterPatient(PatientIntake intake)
+        public Task<Patient> RegisterPatient(PatientIntake intake)
         {
             throw new NotImplementedException();
         }
