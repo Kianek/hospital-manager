@@ -14,7 +14,7 @@ namespace HospitalManager.UnitTests.Hospitals
 
         public HospitalServiceTest(DbFixture fixture)
         {
-            _context = fixture.Context;
+            _context = fixture.GetContext();
             ResetDatabase().GetAwaiter().GetResult();
             _service = new HospitalService(_context);
         }
