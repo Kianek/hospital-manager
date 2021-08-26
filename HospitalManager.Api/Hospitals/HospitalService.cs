@@ -14,7 +14,7 @@ namespace HospitalManager.Api.Hospitals
             _context = context;
         }
 
-        public Task<IEnumerable<Hospital>> GetAllHospitals()
+        public Task<List<Hospital>> GetAllHospitals()
         {
             throw new NotImplementedException();
         }
