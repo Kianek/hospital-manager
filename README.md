@@ -1,0 +1,1 @@
+https://app.travis-ci.com/Kianek/hospital-manager.svg?branch=master
