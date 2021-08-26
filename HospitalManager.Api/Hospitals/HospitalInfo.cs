@@ -1,4 +1,4 @@
 namespace HospitalManager.Api.Hospitals
 {
-    public record HospitalInfo(string name, int numberOfRooms);
+    public record HospitalInfo(string Name, int NumberOfRooms);
 }
