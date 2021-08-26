@@ -30,9 +30,11 @@ namespace HospitalManager.Api.Hospitals
             return await _context.Hospitals.FindAsync(hospitalId);
         }
 
-        public Task<Hospital> GetHospitalByName(string name)
+        public async Task<Hospital> GetHospitalByName(string name)
         {
-            throw new NotImplementedException();
+            return await _context.Hospitals
+                .AsNoTracking()
+                .FirstOrDefaultAsync(h => h.Name == name);
         }
 
         public Task<int> CreateHospital(HospitalInfo info)
