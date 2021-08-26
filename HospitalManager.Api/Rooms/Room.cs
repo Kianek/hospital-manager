@@ -30,9 +30,13 @@ namespace HospitalManager.Api.Rooms
         
         public Room() {}
 
-        public bool AddBed(Bed bed)
+        public void AddBed(Bed bed)
         {
-            throw new NotImplementedException();
+            if (bed is null) throw new ArgumentNullException(nameof(bed));
+            
+            bed.Room = this;
+            Beds.Add(bed);
+            NumberOfBeds++;
         }
 
         public bool RemoveBed(Bed bed)
