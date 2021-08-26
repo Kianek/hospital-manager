@@ -57,7 +57,16 @@ namespace HospitalManager.Api.Rooms
 
         public bool AssignPatientToBed(PatientBedAssignment assignment)
         {
-            throw new NotImplementedException();
+            if (assignment is null) throw new ArgumentNullException(nameof(assignment));
+            if (assignment.Patient is null) throw new ArgumentNullException(nameof(assignment));
+            
+            var bed = Beds.Find(b => b.Id == assignment.Bed.Id);
+            if (bed is null || bed.IsOccupied) return false;
+            
+            bed.AssignPatient(assignment.Patient);
+            OccupiedBeds++;
+
+            return true;
         }
 
         public bool RemovePatientFromBed(Bed bed)
