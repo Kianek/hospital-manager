@@ -7,8 +7,18 @@ namespace HospitalManager.Api.Beds
 {
     public class Bed : Entity
     {
+        private Room _room;
         public Guid RoomId { get; set; }
-        public Room Room { get; set; }
+
+        public Room Room
+        {
+            get => _room;
+            set
+            {
+                _room = value;
+                RoomId = value.Id;
+            }
+        }
         public Guid? PatientId { get; set; }
         public Patient? Patient { get; set; }
         public bool IsOccupied { get; set; } = false;
@@ -16,7 +26,6 @@ namespace HospitalManager.Api.Beds
         public Bed(Room room)
         {
             Room = room;
-            RoomId = room.Id;
         }
 
         public Bed()
