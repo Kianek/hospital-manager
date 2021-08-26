@@ -10,7 +10,7 @@ namespace HospitalManager.Api.Hospitals
         public string Name { get; set; }
         public List<Room> Rooms { get; set; }
 
-        public Hospital(HospitalInfo info) : this(info.name, info.numberOfRooms)
+        public Hospital(HospitalInfo info) : this(info.Name, info.NumberOfRooms)
         { }
         
         public Hospital(string name, int numberOfRooms)
