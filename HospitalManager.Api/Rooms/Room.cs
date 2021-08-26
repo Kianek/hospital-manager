@@ -69,9 +69,17 @@ namespace HospitalManager.Api.Rooms
             return true;
         }
 
-        public bool RemovePatientFromBed(Bed bed)
+        public bool RemovePatientFromBed(Bed occupiedBed)
         {
-            throw new NotImplementedException();
+            var bed = Beds.Find(b => b.Id == occupiedBed.Id);
+            if (bed is null || !bed.IsOccupied) return false;
+            
+            bed.Patient = null;
+            bed.PatientId = null;
+            bed.IsOccupied = !bed.IsOccupied;
+            OccupiedBeds--;
+            
+            return true;
         }
     }
 }
