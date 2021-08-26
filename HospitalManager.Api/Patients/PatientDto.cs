@@ -7,7 +7,7 @@ namespace HospitalManager.Api.Patients
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Guid RoomId { get; set; }
+        public Guid? RoomId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastModified { get; set; }
 
