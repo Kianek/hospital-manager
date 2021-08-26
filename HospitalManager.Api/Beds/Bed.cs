@@ -12,6 +12,7 @@ namespace HospitalManager.Api.Beds
         public Room Room { get; set; }
         public Guid? PatientId { get; set; }
         public Patient? Patient { get; set; }
+        public bool IsOccupied { get; set; } = false;
 
         public Bed(Room room)
         {
@@ -23,11 +24,6 @@ namespace HospitalManager.Api.Beds
         {
         }
 
-        public bool IsOccupied()
-        {
-            throw new NotImplementedException();
-        }
-        
         public bool AssignPatient(Patient patient)
         {
             throw new NotImplementedException();
