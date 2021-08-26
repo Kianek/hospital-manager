@@ -26,6 +26,9 @@ namespace HospitalManager.Api.Patients
             }
         }
         
+        public Patient(PatientIntake intake): 
+            this(intake.FirstName, intake.LastName) {}
+        
         public Patient(string firstName, string lastName)
         {
             FirstName = firstName;
