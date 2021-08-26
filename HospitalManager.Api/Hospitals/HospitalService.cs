@@ -37,9 +37,13 @@ namespace HospitalManager.Api.Hospitals
                 .FirstOrDefaultAsync(h => h.Name == name);
         }
 
-        public Task<Hospital> CreateHospital(HospitalInfo info)
+        public async Task<Hospital> CreateHospital(HospitalInfo info)
         {
-            throw new NotImplementedException();
+            var hospital = new Hospital(info);
+            _context.Hospitals.Add(hospital);
+            await _context.SaveChangesAsync();
+
+            return hospital;
         }
     }
 }
