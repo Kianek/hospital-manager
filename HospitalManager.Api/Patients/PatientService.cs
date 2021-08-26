@@ -13,14 +13,20 @@ namespace HospitalManager.Api.Patients
             _context = context;
         }
 
-        public Task<Patient> RegisterPatient(PatientIntake intake)
+        public async Task<Patient> RegisterPatient(PatientIntake intake)
         {
-            throw new NotImplementedException();
+            if (intake is null) throw new ArgumentNullException(nameof(intake));
+            
+            var patient = new Patient(intake);
+            _context.Patients.Add(patient);
+            await _context.SaveChangesAsync();
+
+            return patient;
         }
 
-        public Task<Patient> GetPatientById(Guid patientId)
+        public async Task<Patient> GetPatientById(Guid patientId)
         {
-            throw new NotImplementedException();
+            return await _context.Patients.FindAsync(patientId);
         }
     }
 }
