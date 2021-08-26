@@ -1,5 +1,5 @@
 language: csharp
-solution: hospital-manager.sln
+solution: HospitalManager.sln
 mono: none
 dotnet: 5.0
 install:
