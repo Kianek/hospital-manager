@@ -78,13 +78,14 @@ namespace HospitalManager.UnitTests.Hospitals
         }
 
         [Fact]
-        public async Task CreateHospital_HospitalCreated_ReturnsInt()
+        public async Task CreateHospital_HospitalCreated_ReturnsHospital()
         {
             var info = Helpers.GetHospitalInfo();
             
             var result = await _service.CreateHospital(info);
             
-            Assert.True(result > 0);
+            Assert.NotNull(result);
+            Assert.Equal(info.Name, result.Name);
         }
 
         [Fact]
