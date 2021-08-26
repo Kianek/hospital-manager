@@ -37,7 +37,7 @@ namespace HospitalManager.Api.Hospitals
                 .FirstOrDefaultAsync(h => h.Name == name);
         }
 
-        public Task<int> CreateHospital(HospitalInfo info)
+        public Task<Hospital> CreateHospital(HospitalInfo info)
         {
             throw new NotImplementedException();
         }
