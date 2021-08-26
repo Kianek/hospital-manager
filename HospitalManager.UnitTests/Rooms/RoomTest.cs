@@ -116,6 +116,12 @@ namespace HospitalManager.UnitTests.Rooms
             Assert.True(_room.RemovePatientFromBed(_bed));
             Assert.True(_room.OccupiedBeds == 0);
         }
+        
+        [Fact]
+        public void RemovePatientFromBed_BedNotFound_ReturnsFalse()
+        {
+            Assert.False(_room.RemovePatientFromBed(_bed));
+        }
 
         [Fact]
         public void RemovePatientFromBed_BedUnoccupied_ReturnsFalse()
