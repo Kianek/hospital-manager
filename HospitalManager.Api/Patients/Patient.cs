@@ -1,4 +1,5 @@
 using System;
+using HospitalManager.Api.Beds;
 using HospitalManager.Api.Data;
 using HospitalManager.Api.Rooms;
 
@@ -11,6 +12,8 @@ namespace HospitalManager.Api.Patients
 
         public Guid RoomId { get; set; }
         public Room Room { get; set; }
+        public Guid? BedId { get; set; }
+        public Bed? Bed { get; set; }
         
         public Patient(string firstName, string lastName)
         {
