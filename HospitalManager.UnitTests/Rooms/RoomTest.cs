@@ -62,16 +62,17 @@ namespace HospitalManager.UnitTests.Rooms
         [Fact]
         public void AssignBedToPatient_BedAvailableAndPatientValid_ReturnsTrue()
         {
-            _room = Helpers.GetRoomWithBed();
-
-            Assert.True(_room.AssignPatientToBed(_patient));
+            Assert.True(_room.AssignPatientToBed(Helpers.GetBedAssignment()));
         }
 
         [Fact]
         public void AssignBedToPatient_BedOccupied_ReturnsFalse()
         {
             _room.AddBed(_bed);
-            var result = _room.AssignPatientToBed(_patient, _bed);
+            _bed.AssignPatient(_patient);
+            
+            var bedAssignment = new PatientBedAssignment(_room.RoomNumber, _patient, _bed);
+            var result = _room.AssignPatientToBed(bedAssignment);
 
             Assert.False(result);
         }
@@ -83,9 +84,9 @@ namespace HospitalManager.UnitTests.Rooms
         }
 
         [Fact]
-        public void AssignBedToPatient_BedNull_ThrowsArgumentNullException()
+        public void AssignBedToPatient_PatientBedAssignmentNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => _room.AssignPatientToBed(_patient, null!));
+            Assert.Throws<ArgumentNullException>(() => _room.AssignPatientToBed(null!));
         }
 
         [Fact]
