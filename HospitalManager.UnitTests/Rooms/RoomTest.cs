@@ -20,13 +20,13 @@ namespace HospitalManager.UnitTests.Rooms
         }
 
         [Fact]
-        public void AddBed_BedAdded_AvailableBedsIncremented_ReturnsTrue()
+        public void AddBed_BedAdded_NumberOfBedsIncremented_ReturnsTrue()
         {
             var result = _room.AddBed(Helpers.GetBed());
             
             Assert.True(result);
             Assert.True(_room.Beds.Count == 1);
-            Assert.True(_room.AvailableBeds == 1);
+            Assert.True(_room.NumberOfBeds == 1);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace HospitalManager.UnitTests.Rooms
         }
 
         [Fact]
-        public void RemoveBed_BedFoundAndRemoved_AvailableBedsDecremented_ReturnsTrue()
+        public void RemoveBed_BedFoundAndRemoved_NumberOfBedsDecremented_ReturnsTrue()
         {
             _room.AddBed(_bed);
 
@@ -44,7 +44,7 @@ namespace HospitalManager.UnitTests.Rooms
             
             Assert.True(result);
             Assert.True(_room.Beds.Count == 0);
-            Assert.True(_room.AvailableBeds == 0);
+            Assert.True(_room.NumberOfBeds == 0);
         }
 
         [Fact]
@@ -62,7 +62,13 @@ namespace HospitalManager.UnitTests.Rooms
         [Fact]
         public void AssignBedToPatient_BedAvailableAndPatientValid_ReturnsTrue()
         {
-            Assert.True(_room.AssignPatientToBed(Helpers.GetBedAssignment()));
+            _room.AddBed(_bed);
+            var bedAssignment = Helpers.GetBedAssignment(_room, _bed, _patient);
+
+            var result = _room.AssignPatientToBed(bedAssignment);
+            
+            Assert.True(result);
+            Assert.True(_room.OccupiedBeds == 1);
         }
 
         [Fact]
@@ -96,7 +102,7 @@ namespace HospitalManager.UnitTests.Rooms
             _bed.AssignPatient(_patient);
 
             Assert.True(_room.RemovePatientFromBed(_bed));
-
+            Assert.True(_room.OccupiedBeds == 0);
         }
 
         [Fact]
