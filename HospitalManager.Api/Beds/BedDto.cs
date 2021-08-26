@@ -14,7 +14,7 @@ namespace HospitalManager.Api.Beds
             Id = bed.Id;
             RoomId = bed.RoomId;
             PatientId = bed.PatientId;
-            IsOccupied = bed.IsOccupied();
+            IsOccupied = bed.IsOccupied;
         }
 
         public BedDto()
