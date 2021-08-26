@@ -9,12 +9,12 @@ namespace HospitalManager.UnitTests
     {
         public static Hospital GetHospital(
             string name = "Sickhouse General", int numberOfRooms = 50)
-            => new (name, numberOfRooms);
+            => new(name, numberOfRooms);
 
         public static Room GetRoom(
             int roomNumber = 1) => new(
-                roomNumber, GetHospital()
-            );
+            roomNumber, GetHospital()
+        );
 
         public static Room GetRoomWithBed()
         {
@@ -25,7 +25,9 @@ namespace HospitalManager.UnitTests
 
         public static Bed GetBed() => new(GetRoom());
 
-        public static Patient GetPatient() => new ("American", "McGee");
+        public static Patient GetPatient() => new("American", "McGee");
+
+        public static PatientIntake GetPatientIntake() => new() { FirstName = "American", LastName = "McGee" };
 
         public static PatientBedAssignment GetBedAssignment(Room room, Bed bed = null, Patient patient = null)
         {
