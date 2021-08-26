@@ -13,7 +13,7 @@ namespace HospitalManager.UnitTests.Patients
 
         public PatientServiceTest(DbFixture fixture)
         {
-            _context = fixture.Context;
+            _context = fixture.GetContext();
             _context.Database.EnsureCreated();
             _service = new PatientService(_context);
         }
