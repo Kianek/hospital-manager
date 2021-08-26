@@ -46,6 +46,7 @@ namespace HospitalManager.UnitTests.Beds
             _bed.AssignPatient(_patient);
             
             Assert.True(_bed.RemovePatient());
+            Assert.False(_bed.IsOccupied);
         }
 
         [Fact]
