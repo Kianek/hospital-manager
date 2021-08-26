@@ -28,9 +28,8 @@ namespace HospitalManager.UnitTests.Hospitals
 
         [Theory]
         [InlineData("")]
-        [InlineData("Snazzy#($&Hospital")]
-        [InlineData("Still.Invalid")]
-        public void Hospital_NameEmptyOrIncludesInvalidCharacters_ThrowsArgumentException(string name)
+        [InlineData(null!)]
+        public void Hospital_NameEmptyOrNull_ThrowsArgumentException(string name)
         {
             Assert.Throws<ArgumentException>(() => Helpers.GetHospital(name));
         }
