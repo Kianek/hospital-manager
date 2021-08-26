@@ -97,7 +97,8 @@ namespace HospitalManager.UnitTests.Rooms
         [Fact]
         public void AssignBedToPatient_PatientNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => _room.AssignPatientToBed(null!));
+            var bedAssignment = Helpers.GetBedAssignment(_room, _bed);
+            Assert.Throws<ArgumentNullException>(() => _room.AssignPatientToBed(bedAssignment));
         }
 
         [Fact]
