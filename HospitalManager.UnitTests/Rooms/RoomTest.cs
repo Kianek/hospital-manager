@@ -20,11 +20,10 @@ namespace HospitalManager.UnitTests.Rooms
         }
 
         [Fact]
-        public void AddBed_BedAdded_NumberOfBedsIncremented_ReturnsTrue()
+        public void AddBed_BedAdded_NumberOfBedsIncremented()
         {
-            var result = _room.AddBed(Helpers.GetBed());
+            _room.AddBed(Helpers.GetBed());
             
-            Assert.True(result);
             Assert.True(_room.Beds.Count == 1);
             Assert.True(_room.NumberOfBeds == 1);
         }
