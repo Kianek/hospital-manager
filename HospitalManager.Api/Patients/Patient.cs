@@ -19,5 +19,7 @@ namespace HospitalManager.Api.Patients
         }
 
         public Patient() {}
+
+        public PatientDto AsDto() => new(this);
     }
 }

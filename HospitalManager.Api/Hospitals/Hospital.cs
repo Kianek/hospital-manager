@@ -25,5 +25,7 @@ namespace HospitalManager.Api.Hospitals
         {
             throw new NotImplementedException();
         }
+
+        public HospitalDto AsDto() => new(this);
     }
 }

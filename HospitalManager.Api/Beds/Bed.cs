@@ -37,5 +37,7 @@ namespace HospitalManager.Api.Beds
         {
             throw new NotImplementedException();
         }
+
+        public BedDto AsDto() => new(this);
     }
 }
