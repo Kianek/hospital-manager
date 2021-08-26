@@ -38,13 +38,7 @@ namespace HospitalManager.Api.Rooms
             throw new NotImplementedException();
         }
 
-        // Assigns the patient to the first available bed, if any
-        public bool AssignPatientToBed(Patient patient)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool AssignPatientToBed(Patient patient, Bed bed)
+        public bool AssignPatientToBed(PatientBedAssignment assignment)
         {
             throw new NotImplementedException();
         }
