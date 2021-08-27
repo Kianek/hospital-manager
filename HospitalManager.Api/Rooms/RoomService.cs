@@ -75,9 +75,26 @@ namespace HospitalManager.Api.Rooms
             return result;
         }
 
-        public Task<bool> AssignPatient(PatientBedAssignment assignment)
+        public async Task<bool> AssignPatient(PatientBedAssignmentRequest request)
         {
-            throw new NotImplementedException();
+            if (request is null) throw new ArgumentNullException(nameof(request));
+            
+            var room = await _context.Rooms
+                .Where(r => r.Hospital.Name == request.HospitalName)
+                .Include(r => r.Beds)
+                .FirstAsync(r => r.RoomNumber == request.RoomNumber);
+            var patient = await _context.Patients.FindAsync(request.PatientId);
+            var bed = room.Beds.Find(b => b.Id == request.BedId);
+            if (patient is null || bed is null) return false;
+            
+            var result = room.AssignPatientToBed(new PatientBedAssignment {Bed = bed, Patient = patient, RoomNumber = room.RoomNumber});
+
+            _context.Beds.Attach(bed);
+            _context.Patients.Attach(patient);
+            _context.Rooms.Attach(room);
+            await _context.SaveChangesAsync();
+
+            return result;
         }
     }
 }
