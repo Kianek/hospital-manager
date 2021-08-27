@@ -16,7 +16,8 @@ namespace HospitalManager.Api.Rooms
 
         public Guid HospitalId { get; set; }
         public Hospital Hospital { get; set; }
-        public List<Bed> Beds { get; set; }
+        public List<Bed>? Beds { get; set; }
+        public List<Patient>? Patients { get; set; }
 
         public Room(int roomNumber, Hospital hospital)
         {
@@ -37,7 +38,7 @@ namespace HospitalManager.Api.Rooms
             if (bed is null) throw new ArgumentNullException(nameof(bed));
 
             bed.Room = this;
-            Beds.Add(bed);
+            Beds?.Add(bed);
             NumberOfBeds++;
         }
 
@@ -60,10 +61,14 @@ namespace HospitalManager.Api.Rooms
             if (assignment is null) throw new ArgumentNullException(nameof(assignment));
             if (assignment.Patient is null) throw new ArgumentNullException(nameof(assignment));
             
-            var bed = Beds.Find(b => b.Id == assignment.Bed.Id);
+            var bed = Beds?.Find(b => b.Id == assignment.Bed.Id);
             if (bed is null || bed.IsOccupied) return false;
-            
-            bed.AssignPatient(assignment.Patient);
+
+            var patient = assignment.Patient;
+            patient.RoomId = Id;
+            patient.Room = this;
+            Patients?.Add(patient);
+            bed.AssignPatient(patient);
             OccupiedBeds++;
 
             return true;
@@ -71,7 +76,7 @@ namespace HospitalManager.Api.Rooms
 
         public bool RemovePatientFromBed(Bed occupiedBed)
         {
-            var bed = Beds.Find(b => b.Id == occupiedBed.Id);
+            var bed = Beds?.Find(b => b.Id == occupiedBed.Id);
             if (bed is null || !bed.IsOccupied) return false;
             
             bed.Patient = null;
