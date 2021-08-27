@@ -34,7 +34,7 @@ namespace HospitalManager.Api.Hospitals
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(HospitalInfo hospital)
+        public async Task<IActionResult> CreateHospital(HospitalInfo hospital)
         {
             throw new NotImplementedException();
         }
