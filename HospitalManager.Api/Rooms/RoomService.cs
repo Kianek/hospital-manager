@@ -31,9 +31,12 @@ namespace HospitalManager.Api.Rooms
                 .FirstOrDefaultAsync(r => r.RoomNumber == roomNumber);
         }
 
-        public Task<List<Room>> GetRoomsByHospitalName(string name)
+        public async Task<List<Room>> GetRoomsByHospitalName(string name)
         {
-            throw new NotImplementedException();
+            return await _context.Rooms
+                .AsNoTracking()
+                .Where(r => r.Hospital.Name == name)
+                .ToListAsync();
         }
 
         public Task<Bed> AddBedsToRoom(RoomBedOrder order)
