@@ -47,8 +47,9 @@ namespace HospitalManager.Api.Rooms
             if (order is null) throw new ArgumentNullException(nameof(order));
             
             var room = await _context.Rooms
-                .AsTracking()
+                .AsNoTracking()
                 .Include(r => r.Hospital)
+                .Include(r => r.Beds)
                 .Where(r => r.Hospital.Name == order.HospitalName)
                 .FirstOrDefaultAsync(r => r.RoomNumber == order.RoomNumber);
 
