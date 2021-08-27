@@ -13,18 +13,18 @@ namespace HospitalManager.Api.Rooms
         public int NumberOfBeds { get; private set; }
         public int OccupiedBeds { get; private set; }
         public bool HasVacancy => NumberOfBeds > OccupiedBeds;
-
+        public string HospitalName {get;set;}
         public Guid HospitalId { get; set; }
         public Hospital Hospital { get; set; }
-        public List<Bed>? Beds { get; set; }
-        public List<Patient>? Patients { get; set; }
+        public List<Bed>? Beds { get; set; } = new ();
+        public List<Patient>? Patients { get; set; } = new();
 
         public Room(int roomNumber, Hospital hospital)
         {
             RoomNumber = roomNumber;
-            Beds = new List<Bed>();
             NumberOfBeds = 0;
             OccupiedBeds = 0;
+            HospitalName = hospital.Name;
             HospitalId = hospital.Id;
             Hospital = hospital;
         }
@@ -39,7 +39,7 @@ namespace HospitalManager.Api.Rooms
 
             bed.Room = this;
             Beds?.Add(bed);
-            NumberOfBeds++;
+            NumberOfBeds = Beds.Count;
         }
 
         public bool RemoveBed(Bed bed)
