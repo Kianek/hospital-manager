@@ -1,3 +1,4 @@
+using System;
 using HospitalManager.Api.Beds;
 using HospitalManager.Api.Hospitals;
 using HospitalManager.Api.Patients;
@@ -35,6 +36,10 @@ namespace HospitalManager.UnitTests
 
             return new(_room.RoomNumber, patient, bed);
         }
+
+        public static PatientBedAssignmentRequest GetBedAssignmentRequest(
+            Guid bedId, Guid patientId, string hospitalName = "Sickhouse General", int roomNumber = 1)
+            => new(hospitalName, roomNumber, patientId, bedId);
 
         public static HospitalInfo GetHospitalInfo(string name = "Sickhouse General", int numberOfRooms = 10)
             => new(name, numberOfRooms);
