@@ -12,25 +12,14 @@ namespace HospitalManager.IntegrationTests
     {
         public static void InitializeDatabase(AppDbContext context)
         {
-            var hospitals = new List<Hospital>
-            {
-                new Hospital("Sickhouse General", 50),
-                new Hospital("Generic Hospital", 50),
-                new Hospital("Animal Hospital", 50),
-            };
+            var hospitals = Models.Hospitals;
             
             hospitals[0].Rooms[0].AddBed(new Bed());
             hospitals[0].Rooms[0].AddBed(new Bed());
             hospitals[0].Rooms[0].AddBed(new Bed());
             context.Hospitals.AddRange(hospitals);
 
-            var patients = new List<Patient>
-            {
-                new Patient("John", "Wayne"),
-                new Patient("Michael", "Jackson"),
-                new Patient("Some", "Guy"),
-                new Patient("Lita", "Ford"),
-            };
+            var patients = Models.Patients;
             context.Patients.AddRange(patients);
 
             context.SaveChanges();
