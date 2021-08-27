@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HospitalManager.Api.Beds;
 using HospitalManager.Api.Patients;
 
 namespace HospitalManager.Api.Rooms
