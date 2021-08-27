@@ -18,7 +18,17 @@ namespace HospitalManager.Api.Patients
         [HttpPost]
         public async Task<IActionResult> RegisterPatient(PatientIntake intake)
         {
-            throw new NotImplementedException();
+            Patient patient;
+            try
+            {
+                patient = await _service.RegisterPatient(intake);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+            return CreatedAtAction(nameof(RegisterPatient), patient.AsDto());
         }
 
         [HttpGet("{patientId:guid}")]
