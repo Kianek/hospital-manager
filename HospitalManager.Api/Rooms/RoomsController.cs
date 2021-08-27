@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HospitalManager.Api.Rooms
 {
     [ApiController]
-    [Route("api/hospitals")]
+    [Route("api/[controller]")]
     public class RoomsController : ControllerBase
     {
         private readonly IRoomService _service;
@@ -16,40 +16,33 @@ namespace HospitalManager.Api.Rooms
             _service = service;
         }
 
-        [HttpGet("{hospitalName:alpha}")]
-        public async Task<IActionResult> GetRoomsByHospitalName()
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{hospitalName:alpha}/rooms/{roomId:guid}")]
-        public async Task<IActionResult> GetRoomById(string hospitalName, Guid roomId)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{hospitalName:alpha}/rooms/{roomNumber:int}")]
-        public async Task<IActionResult> GetRoomByRoomNumber(string hospitalName, int roomNumber)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPatch("{hospitalName:alpha}/rooms/{roomNumber:int}/beds")]
+        [HttpPatch("{roomNumber:int}/beds")]
         public async Task<IActionResult> AddBedsToRoom(RoomBedOrder order)
         {
-            throw new NotImplementedException();
+            var result = await _service.AddBedsToRoom(order);
+
+            if (result is null) return BadRequest(order);
+
+            return Ok(result.AsDto());
         }
 
-        [HttpPatch("{hospitalName:alpha}/rooms/{roomNumber:int}/beds/{bedId:guid}")]
+        [HttpPatch("{roomNumber:int}/beds/{bedId:guid}")]
         public async Task<IActionResult> AssignPatientToBed(PatientBedAssignmentRequest request)
         {
-            throw new NotImplementedException();
+            var result = await _service.AssignPatient(request);
+
+            // TODO: this could be either a bad request or not found
+            if (!result) return BadRequest();
+
+            return Ok();
         }
 
-        [HttpDelete("{hospitalName:alpha}/rooms/{roomNumber:int}/beds")]
-        public async Task<IActionResult> RemoveBedFromRoom()
+        [HttpDelete("{roomId:guid}/beds/{bedId:guid}")]
+        public async Task<IActionResult> RemoveBedFromRoom(Guid roomId, Guid bedId)
         {
-            throw new NotImplementedException();
+            var result = await _service.RemoveBedFromRoom(roomId, bedId);
+            
+            return result ? Ok() : BadRequest();
         }
     }
 }
