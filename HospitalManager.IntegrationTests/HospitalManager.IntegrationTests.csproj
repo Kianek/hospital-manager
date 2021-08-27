@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HospitalManager.Api\HospitalManager.Api.csproj" />
+    <ProjectReference Include="..\HospitalManager.UnitTests\HospitalManager.UnitTests.csproj" />
   </ItemGroup>
 
 </Project>
