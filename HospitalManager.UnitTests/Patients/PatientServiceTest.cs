@@ -37,6 +37,18 @@ namespace HospitalManager.UnitTests.Patients
         }
 
         [Fact]
+        public async Task GetAllPatients_ReturnsPatients()
+        {
+            await _service.RegisterPatient(Helpers.GetPatientIntake());
+            await _service.RegisterPatient(Helpers.GetPatientIntake("Billy", "Joel"));
+            await _service.RegisterPatient(Helpers.GetPatientIntake("Bob", "Saget"));
+
+            var result = await _service.GetAllPatients();
+            
+            Assert.True(result.Count == 3);
+        }
+
+        [Fact]
         public async Task GetPatientById_ReturnsFoundPatient()
         {
             var patient = await _service.RegisterPatient(Helpers.GetPatientIntake());
