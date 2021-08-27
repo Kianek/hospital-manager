@@ -97,7 +97,8 @@ namespace HospitalManager.UnitTests.Rooms
             var room = _hospital.Rooms[0];
             
             room.AddBed(bed);
-            _context.Rooms.Add(room);
+            _context.Beds.Add(bed);
+            _context.Rooms.Attach(room);
             await _context.SaveChangesAsync();
             var result = await _service.RemoveBedFromRoom(bed.Id);
 
