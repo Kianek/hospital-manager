@@ -42,6 +42,10 @@ namespace HospitalManager.Api.Data
                 entity.HasMany(r => r.Beds)
                     .WithOne(b => b.Room);
 
+                entity.HasMany(r => r.Patients)
+                    .WithOne(p => p.Room)
+                    .HasForeignKey(p => p.RoomId);
+
                 entity.Property(r => r.RoomNumber)
                     .IsRequired();
 
@@ -70,6 +74,10 @@ namespace HospitalManager.Api.Data
             builder.Entity<Patient>(entity =>
             {
                 entity.HasKey(p => p.Id);
+
+                entity.HasOne(p => p.Room)
+                    .WithMany(r => r!.Patients)
+                    .HasForeignKey(p => p.RoomId);
                 
                 entity.HasOne(p => p.Bed)
                     .WithOne(b => b.Patient)

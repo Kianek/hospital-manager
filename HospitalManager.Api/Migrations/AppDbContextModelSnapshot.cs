@@ -78,7 +78,7 @@ namespace HospitalManager.Api.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("RoomId")
+                    b.Property<Guid?>("RoomId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -137,10 +137,8 @@ namespace HospitalManager.Api.Migrations
             modelBuilder.Entity("HospitalManager.Api.Patients.Patient", b =>
                 {
                     b.HasOne("HospitalManager.Api.Rooms.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Patients")
+                        .HasForeignKey("RoomId");
 
                     b.Navigation("Room");
                 });
@@ -169,6 +167,8 @@ namespace HospitalManager.Api.Migrations
             modelBuilder.Entity("HospitalManager.Api.Rooms.Room", b =>
                 {
                     b.Navigation("Beds");
+
+                    b.Navigation("Patients");
                 });
 #pragma warning restore 612, 618
         }
