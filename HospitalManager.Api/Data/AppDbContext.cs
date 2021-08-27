@@ -29,6 +29,8 @@ namespace HospitalManager.Api.Data
 
                 entity.Property(h => h.Name)
                     .HasMaxLength(200);
+
+                entity.Property(h => h.NumberOfRooms);
             });
 
             builder.Entity<Room>(entity =>
