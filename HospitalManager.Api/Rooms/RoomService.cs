@@ -60,9 +60,19 @@ namespace HospitalManager.Api.Rooms
             return room;
         }
 
-        public Task<bool> RemoveBedFromRoom(Guid bedId)
+        public async Task<bool> RemoveBedFromRoom(Guid roomId, Guid bedId)
         {
-            throw new NotImplementedException();
+            // TODO: what if the bed is occupied?
+            var room = await _context.Rooms.FindAsync(roomId);
+            var bed = room?.Beds.Find(b => b.Id == bedId);
+            if (room is null || bed is null) return false;
+            
+            var result = room.RemoveBed(bed);
+            _context.Beds.Remove(bed);
+            _context.Rooms.Attach(room);
+            await _context.SaveChangesAsync();
+            
+            return result;
         }
 
         public Task<bool> AssignPatient(PatientBedAssignment assignment)
