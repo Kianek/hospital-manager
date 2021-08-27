@@ -36,7 +36,7 @@ namespace HospitalManager.IntegrationTests
 
                 try
                 {
-                    // SeedData.InitializeDatabase(db);
+                    SeedData.InitializeDatabase(db);
                 }
                 catch (Exception ex)
                 {
