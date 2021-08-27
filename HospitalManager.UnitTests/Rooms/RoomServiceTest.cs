@@ -118,9 +118,11 @@ namespace HospitalManager.UnitTests.Rooms
         public async Task AssignPatient_PatientAssigned_ReturnsTrue()
         {
             var patient = Helpers.GetPatient();
+            _context.Patients.Add(patient);
+            await _context.SaveChangesAsync();
             var room = _hospital.Rooms[0];
             room.AddBed(Helpers.GetBed());
-            var assignment = Helpers.GetBedAssignment(room, room.Beds[0], patient);
+            var assignment = Helpers.GetBedAssignmentRequest( room.Beds[0].Id, patient.Id, _hospital.Name, room.RoomNumber);
 
             var result = await _service.AssignPatient(assignment);
             
