@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,7 +36,24 @@ namespace HospitalManager.Api.Patients
         [HttpGet("{patientId:guid}")]
         public async Task<IActionResult> GetPatientById(Guid patientId)
         {
-            throw new NotImplementedException();
+            Patient patient;
+            try
+            {
+                patient = await _service.GetPatientById(patientId);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+
+            return Ok(patient.AsDto());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllPatients()
+        {
+            var result = await _service.GetAllPatients();
+            return Ok(result.Select(p => p.AsDto()).ToList());
         }
     }
 }
