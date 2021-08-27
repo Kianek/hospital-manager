@@ -81,7 +81,7 @@ namespace HospitalManager.UnitTests.Rooms
             var result = await _service.AddBedsToRoom(bedOrder);
             
             Assert.NotNull(result);
-            Assert.Equal(result.RoomId, room.Id);
+            Assert.Equal(result.Id, room.Id);
         }
 
         [Fact]
