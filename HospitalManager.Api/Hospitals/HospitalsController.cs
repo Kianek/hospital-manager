@@ -38,17 +38,5 @@ namespace HospitalManager.Api.Hospitals
         {
             throw new NotImplementedException();
         }
-
-        [HttpPatch("{name:alpha}")]
-        public async Task<IActionResult> RenameHospital(string name, [FromBody] HospitalInfo updatedInfo)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpDelete("{hospitalId:guid}")]
-        public async Task<IActionResult> DeleteHospital(Guid hospitalId)
-        {
-            throw new NotImplementedException();
-        }
-}
+    }
 }
