@@ -34,6 +34,8 @@ namespace HospitalManager.Api.Hospitals
         {
             return await _context.Hospitals
                 .AsNoTracking()
+                .Include(h => h.Rooms)
+                .ThenInclude(r => r.Beds)
                 .FirstOrDefaultAsync(h => h.Name == name);
         }
 
