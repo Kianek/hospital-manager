@@ -28,7 +28,8 @@ namespace HospitalManager.UnitTests
 
         public static Patient GetPatient() => new("American", "McGee");
 
-        public static PatientIntake GetPatientIntake() => new() { FirstName = "American", LastName = "McGee" };
+        public static PatientIntake GetPatientIntake(string firstName = "American", string lastName = "McGee") 
+            => new() { FirstName = firstName, LastName = lastName };
 
         public static PatientBedAssignment GetBedAssignment(Room room, Bed bed = null, Patient patient = null)
         {
