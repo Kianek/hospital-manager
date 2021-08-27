@@ -26,7 +26,9 @@ namespace HospitalManager.Api.Rooms
 
         public async Task<Room> GetRoomByRoomNumber(string hospitalName, int roomNumber)
         {
-            throw new NotImplementedException();
+            return await _context.Rooms
+                .Where(r => r.Hospital.Name == hospitalName)
+                .FirstOrDefaultAsync(r => r.RoomNumber == roomNumber);
         }
 
         public Task<List<Room>> GetRoomsByHospitalName(string name)
