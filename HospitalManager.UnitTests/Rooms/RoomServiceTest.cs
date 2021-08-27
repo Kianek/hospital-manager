@@ -68,8 +68,8 @@ namespace HospitalManager.UnitTests.Rooms
         public async Task GetRoomsByHospitalName_NotFound_ReturnsEmptySequence()
         {
             var result = await _service.GetRoomsByHospitalName("Imaginary General");
-            
-            Assert.Null(result);
+
+            Assert.True(result.Count == 0);
         }
 
         [Fact]
