@@ -19,13 +19,13 @@ namespace HospitalManager.Api.Rooms
         {
             Id = room.Id;
             RoomNumber = room.RoomNumber;
-            NumberOfBeds = room.NumberOfBeds;
             OccupiedBeds = room.OccupiedBeds;
             HasVacancy = room.HasVacancy;
             HospitalName = room.HospitalName;
             Beds = room.Beds?
                 .Select(b => b.AsDto())
                 .ToList();
+            NumberOfBeds = Beds!.Count;
         }
 
         public RoomDto()
