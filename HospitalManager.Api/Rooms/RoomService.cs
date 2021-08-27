@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using HospitalManager.Api.Beds;
 using HospitalManager.Api.Data;
 using HospitalManager.Api.Patients;
 
@@ -15,32 +16,32 @@ namespace HospitalManager.Api.Rooms
             _context = context;
         }
 
-        public Task<Room> GetRoomById(Guid roomId)
+        public Task<Room> GetRoomById(string hospitalName, Guid roomId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Room> GetRoomByRoomNumber(int roomNumber)
+        public Task<Room> GetRoomByRoomNumber(string hospitalName, int roomNumber)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Room>> GetRoomsByHospitalName(string name)
+        public Task<List<Room>> GetRoomsByHospitalName(string name)
         {
             throw new NotImplementedException();
         }
 
-        public Task AddBedsToRoom(int numberOfBedsToAdd = 1)
+        public Task<Bed> AddBedsToRoom(RoomBedOrder order)
         {
             throw new NotImplementedException();
         }
 
-        public Task RemoveBedFromRoom(Guid bedId)
+        public Task<bool> RemoveBedFromRoom(Guid bedId)
         {
             throw new NotImplementedException();
         }
 
-        public Task AssignPatient(PatientBedAssignment assignment)
+        public Task<bool> AssignPatient(PatientBedAssignment assignment)
         {
             throw new NotImplementedException();
         }
