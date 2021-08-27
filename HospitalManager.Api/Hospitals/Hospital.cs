@@ -8,6 +8,7 @@ namespace HospitalManager.Api.Hospitals
     public class Hospital : Entity
     {
         public string Name { get; set; }
+        public int NumberOfRooms { get; set; }
         public List<Room> Rooms { get; set; }
 
         public Hospital(HospitalInfo info) : this(info.Name, info.NumberOfRooms)
@@ -19,6 +20,7 @@ namespace HospitalManager.Api.Hospitals
             if (numberOfRooms <= 0) throw new ArgumentOutOfRangeException(nameof(numberOfRooms));
             
             Name = name;
+            NumberOfRooms = numberOfRooms;
             Rooms = GenerateRooms(numberOfRooms);
         }
         
