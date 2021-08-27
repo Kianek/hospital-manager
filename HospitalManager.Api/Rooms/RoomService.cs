@@ -39,9 +39,25 @@ namespace HospitalManager.Api.Rooms
                 .ToListAsync();
         }
 
-        public Task<Bed> AddBedsToRoom(RoomBedOrder order)
+        public async Task<Room> AddBedsToRoom(RoomBedOrder order)
         {
-            throw new NotImplementedException();
+            if (order is null) throw new ArgumentNullException(nameof(order));
+            
+            var room = await _context.Rooms
+                .AsTracking()
+                .Where(r => r.Hospital.Name == order.HospitalName)
+                .FirstOrDefaultAsync(r => r.RoomNumber == order.RoomNumber);
+
+            for (var i = 0; i < order.NumberOfBedsToAdd; i++)
+            {
+                room.AddBed(new Bed(room));
+            }
+
+            // TODO: does this still work if saved beds are present?
+            _context.Beds.AddRange(room.Beds);
+            _context.Rooms.Attach(room);
+            await _context.SaveChangesAsync();
+            return room;
         }
 
         public Task<bool> RemoveBedFromRoom(Guid bedId)
