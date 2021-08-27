@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using HospitalManager.Api.Rooms;
 
 namespace HospitalManager.Api.Hospitals
 {
@@ -6,6 +9,7 @@ namespace HospitalManager.Api.Hospitals
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public List<RoomDto> Rooms { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastModified { get; set; }
 
@@ -15,6 +19,9 @@ namespace HospitalManager.Api.Hospitals
             Name = hospital.Name;
             CreatedAt = hospital.CreatedAt;
             LastModified = hospital.LastModified;
+            Rooms = hospital.Rooms
+                .Select(r => r.AsDto())
+                .ToList();
         }
 
         public HospitalDto()
