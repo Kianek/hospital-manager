@@ -100,7 +100,7 @@ namespace HospitalManager.UnitTests.Rooms
             _context.Beds.Add(bed);
             _context.Rooms.Attach(room);
             await _context.SaveChangesAsync();
-            var result = await _service.RemoveBedFromRoom(bed.Id);
+            var result = await _service.RemoveBedFromRoom(room.Id, bed.Id);
 
             Assert.True(result);
         }
@@ -108,7 +108,8 @@ namespace HospitalManager.UnitTests.Rooms
         [Fact]
         public async Task RemoveBedFromRoom_BedNotFound_ReturnsFalse()
         {
-            var result = await _service.RemoveBedFromRoom(Guid.NewGuid());
+            var room = _hospital.Rooms[0];
+            var result = await _service.RemoveBedFromRoom(room.Id, Guid.NewGuid());
 
             Assert.False(result);
         }
