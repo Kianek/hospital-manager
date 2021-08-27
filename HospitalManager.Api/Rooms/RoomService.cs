@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HospitalManager.Api.Beds;
 using HospitalManager.Api.Data;
 using HospitalManager.Api.Patients;
+using Microsoft.EntityFrameworkCore;
 
 namespace HospitalManager.Api.Rooms
 {
@@ -16,12 +18,13 @@ namespace HospitalManager.Api.Rooms
             _context = context;
         }
 
-        public Task<Room> GetRoomById(string hospitalName, Guid roomId)
+        public async Task<Room> GetRoomById(string hospitalName, Guid roomId)
         {
-            throw new NotImplementedException();
+            return await _context.Rooms
+                .FindAsync(roomId);
         }
 
-        public Task<Room> GetRoomByRoomNumber(string hospitalName, int roomNumber)
+        public async Task<Room> GetRoomByRoomNumber(string hospitalName, int roomNumber)
         {
             throw new NotImplementedException();
         }
