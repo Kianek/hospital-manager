@@ -48,6 +48,9 @@ namespace HospitalManager.Api.Data
                     .WithOne(p => p.Room)
                     .HasForeignKey(p => p.RoomId);
 
+                entity.Property(r => r.HospitalName)
+                    .IsRequired();
+                
                 entity.Property(r => r.RoomNumber)
                     .IsRequired();
 

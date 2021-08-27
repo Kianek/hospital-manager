@@ -100,6 +100,10 @@ namespace HospitalManager.Api.Migrations
                     b.Property<Guid>("HospitalId")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("HospitalName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("NumberOfBeds")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
