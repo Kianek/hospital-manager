@@ -13,7 +13,7 @@ namespace HospitalManager.Api.Rooms
         public int OccupiedBeds { get; set; }
         public bool HasVacancy { get; set; }
         public string HospitalName { get; set; }
-        public List<BedDto> Beds { get; set; }
+        public List<BedDto>? Beds { get; set; }
 
         public RoomDto(Room room)
         {
@@ -22,8 +22,8 @@ namespace HospitalManager.Api.Rooms
             NumberOfBeds = room.NumberOfBeds;
             OccupiedBeds = room.OccupiedBeds;
             HasVacancy = room.HasVacancy;
-            HospitalName = room.Hospital.Name;
-            Beds = room.Beds
+            HospitalName = room.HospitalName;
+            Beds = room.Beds?
                 .Select(b => b.AsDto())
                 .ToList();
         }
