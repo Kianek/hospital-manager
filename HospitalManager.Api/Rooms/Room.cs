@@ -81,5 +81,7 @@ namespace HospitalManager.Api.Rooms
             
             return true;
         }
+        
+        public RoomDto AsDto() => new RoomDto(this);
     }
 }
