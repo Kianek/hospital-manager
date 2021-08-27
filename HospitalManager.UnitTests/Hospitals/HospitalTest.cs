@@ -14,6 +14,7 @@ namespace HospitalManager.UnitTests.Hospitals
             
             Assert.True(hospital != null);
             Assert.True(hospital.Name == name);
+            Assert.True(hospital.Rooms.Count == 50);
         }
 
         [Theory]
