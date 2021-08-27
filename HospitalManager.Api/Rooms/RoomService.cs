@@ -27,7 +27,9 @@ namespace HospitalManager.Api.Rooms
         public async Task<Room> GetRoomByRoomNumber(string hospitalName, int roomNumber)
         {
             return await _context.Rooms
-                .Where(r => r.Hospital.Name == hospitalName)
+                .AsNoTracking()
+                .Include(r => r.Beds)
+                .Where(r => r.HospitalName == hospitalName)
                 .FirstOrDefaultAsync(r => r.RoomNumber == roomNumber);
         }
 
@@ -35,6 +37,7 @@ namespace HospitalManager.Api.Rooms
         {
             return await _context.Rooms
                 .AsNoTracking()
+                .Include(r => r.Beds)
                 .Where(r => r.Hospital.Name == name)
                 .ToListAsync();
         }
@@ -45,6 +48,7 @@ namespace HospitalManager.Api.Rooms
             
             var room = await _context.Rooms
                 .AsTracking()
+                .Include(r => r.Hospital)
                 .Where(r => r.Hospital.Name == order.HospitalName)
                 .FirstOrDefaultAsync(r => r.RoomNumber == order.RoomNumber);
 
